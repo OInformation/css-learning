@@ -50,6 +50,8 @@
                 // Log the rejection reason
                 // console.log(`Handle rejected promise (${reason}) here.`);
                 log.insertAdjacentHTML('beforeend', err.message + ') Promise rejected<br>');
+            }).finally((info) => {
+                log.insertAdjacentHTML('beforeend', info + ') Promise finally<br>');
             });
             // end
             log.insertAdjacentHTML('beforeend', thisPromiseCount + ') Promise made<br>');
