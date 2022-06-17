@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="start(3)">onclick</button>
+    <div id="mydiv"></div>
+    <script>
+        function red() {
+            console.log('red');
+            throw new Error("bbbb");
+        }
+
+        function green() {
+            console.log('green');
+        }
+
+        function yellow() {
+            console.log('yellow');
+        }
+
+        let light = (fn, timer) => new Promise((resolve, reject) => {
+            setTimeout(function () {
+                try {
+                    fn()
+                    resolve()
+                } catch (ex) {
+                    reject(ex);
+                }
+            }, timer)
+        })
+
+        // times为交替次数
+        function start(times) {
+            if (times === 0) {
+                return
+            }
+
+            times--
+            Promise.resolve()
+                .then(() => light(red, 3000))
+                .then(() => light(green, 1000), (err) => { console.log(err) })
+                .then(() => light(yellow, 2000))
+                .then(() => start(times))
+
+        }
+    </script>
+</body>
+
+</html>

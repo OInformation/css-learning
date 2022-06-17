@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="addlog()">click</button>
+    <div id="mydiv"></div>
+    <script>
+        const addlog = () => {
+            const mypromise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    try {
+                        const randomInt = Math.random();
+                        const value = randomInt * 10;
+                        console.log(value);
+                        if (value >= 5) {
+                            throw new Error(`Too large ${value}`);
+                        }
+                        // let a = 'sss';
+                        // throw new Error("exc");
+                        resolve("Success!");
+                    } catch (ex) {
+                        reject(ex);
+                    }
+                }, 300);
+            })
+
+            mypromise
+                .then((value) => { return value + " b" })
+                .then((value) => { return value + " c" })
+                .then((value) => { return value + " d" })
+                .then((value) => { return value + " e" })
+                .then(value => {
+                    console.log(value);
+                    return value;
+                })
+                .then((value) => {
+                    document.getElementById("mydiv").innerHTML = value;
+                    return;
+                })
+                .catch((err) => { console.log("err:" + err) })
+        }
+    </script>
+</body>
+
+</html>
